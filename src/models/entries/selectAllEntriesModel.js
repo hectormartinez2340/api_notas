@@ -1,4 +1,4 @@
-import getPool from "../../database/getPool.js";
+import getPool from "../../database/getpool.js";
 
 const selectAllEntriesModel = async () => {
   const pool = await getPool();

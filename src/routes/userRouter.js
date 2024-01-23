@@ -2,8 +2,6 @@ import express from "express";
 
 const router = express.Router();
 
-import errorController from "../middlewares/index.js";
-
 import {
   newUserController,
   loginUserController,
@@ -15,3 +13,5 @@ router.post("/users/register", newUserController);
 router.post("/users/login", loginUserController);
 
 router.get("/users/validate/:registrationCode", validateUserController);
+
+export default router;

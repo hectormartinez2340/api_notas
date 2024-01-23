@@ -1,19 +1,18 @@
-import getPool from '../../database/getPool.js';
+import getPool from "../../database/getpool.js";
 
 const selectUserByEmailModel = async (email) => {
-    const pool = await getPool();
+  const pool = await getPool();
 
-    const [user] = await pool.query(
-        `
+  const [user] = await pool.query(
+    `
             SELECT id, password, role, recoverPassCode, active
             FROM users
             WHERE email = ?
         `,
-        [email]
-    );
-    
+    [email]
+  );
 
-    return user[0];
-}
+  return user[0];
+};
 
 export default selectUserByEmailModel;

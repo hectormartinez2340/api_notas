@@ -1,4 +1,4 @@
-import selectAllEntriesModel from "../../models/users/entries/selectAllEntriesModel.js";
+import selectAllEntriesModel from "../../models/entries/selectAllEntriesModel.js";
 
 const listEntriesController = async (req, res, next) => {
   try {

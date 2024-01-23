@@ -1,10 +1,10 @@
-import upDateUserRegCodeModel from "../models/users/upDateUserRegCodeModel.js";
+import updateUserRegCodeModel from "../../models/users/updateUserRegCodeModel.js";
 
 const validateUserController = async (req, res, next) => {
   try {
     const { registrationCode } = req.params;
 
-    await upDateUserRegCodeModel(registrationCode);
+    await updateUserRegCodeModel(registrationCode);
 
     res.send({
       status: "ok",

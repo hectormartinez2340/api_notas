@@ -4,15 +4,17 @@ const initDB = async () => {
   try {
     let pool = await getpool();
 
-    await pool.query(`DROP DATABASE IF EXISTS notas`);
-    await pool.query(`CREATE DATABASE IF NOT EXISTS notas`);
-    await pool.query(`USE notas`);
+    //await pool.query(`DROP DATABASE IF EXISTS notas`);
+    //await pool.query(`CREATE DATABASE IF NOT EXISTS notas`);
+    //await pool.query(`USE notas`);
 
-    console.log("Creando tablas");
+    console.log("Borro tablas");
 
     await pool.query(`
-      DROP TABLE IF EXISTS notas, imagenes, categorias, usuarios
+    DROP TABLE IF EXISTS notas, imagenes, categorias, usuarios
     `);
+
+    console.log("Creando tablas");
 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS usuarios (
@@ -36,7 +38,7 @@ const initDB = async () => {
         nombre VARCHAR(255) NOT NULL
       )
     `);
-    
+
     await pool.query(`
       CREATE TABLE IF NOT EXISTS notas (
         notas_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -48,7 +50,7 @@ const initDB = async () => {
         url VARCHAR(255)
       )
     `);
- 
+
     await pool.query(`
       CREATE TABLE IF NOT EXISTS imagenes (
         imagen_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -59,9 +61,10 @@ const initDB = async () => {
     `);
 
     console.log("¡Tablas creadas!");
-    process.exit(1);
+    process.exit(0);
   } catch (error) {
     console.error(error);
+    process.exit(1);
   }
 };
 

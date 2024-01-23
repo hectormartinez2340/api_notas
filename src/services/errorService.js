@@ -43,7 +43,7 @@ export const sendMailError = () => {
 };
 
 //usarlo en loginUserController.js
-export const pendignActivationError = () => {
+export const pendingActivationError = () => {
   throw {
     httpStatus: 403,
     code: "PENDING_ACTIVATION",

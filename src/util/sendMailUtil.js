@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-import { sendMailError } from "../services/errorService";
+import { sendMailError } from "../services/errorService.js";
 
 dotenv.config();
 

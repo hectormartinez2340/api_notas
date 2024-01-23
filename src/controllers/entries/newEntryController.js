@@ -1,49 +1,46 @@
-import insertEntryModel from "../../models/users/entries/insertEntryModels.js";
-import {savePhotoService} from "../../services/photoService.js";
+//import insertEntryModel from "../../models/users/entries/insertEntryModels.js";
+import insertEntryModel from "../../models/entries/insertEntryModels.js";
+import { savePhotoService } from "../../services/photoService.js";
 
+const newEntryController = async (req, res, next) => {
+  try {
+    const { title, place, description } = req.body;
+    const entryId = await insertEntryModel(
+      title,
+      place,
+      description,
+      req.user.id
+    );
+    let photos = [];
+    if (req.files) {
+      for (let photo of Object.values(req.files).slice(0, 3)) {
+        let photoName = await savePhotoService(photo, 500);
+        const photoId = await insertPhotoModel(photoName, entryId);
 
-
-const newEntryController = async (req,res,next)=>{
-try {
-    const {title,place,description} = req.body;
-    const entryId = await insertEntryModel(title,place,description,req.user.id);
-    let photos=[];
-    if(req.files){
-        for(let photo of Object.values(req.files).slice(0,3)){
-            let photoName = await savePhotoService(photo, 500);
-            const photoId = await insertPhotoModel(photoName, entryId);
-
-            photos.push({
-                id: photoId,
-                name: photoNAme})
-            }
+        photos.push({
+          id: photoId,
+          name: photoNAme,
+        });
+      }
     }
-    
-    
+
     res.send({
-        status:'ok',
-        data:{
-            entry:{
-                id: entryId,
-                title,
-                place,
-                description,
-                userId:req.user.id,
-                photos,
-                createdAt: new Date()}
-        }
+      status: "ok",
+      data: {
+        entry: {
+          id: entryId,
+          title,
+          place,
+          description,
+          userId: req.user.id,
+          photos,
+          createdAt: new Date(),
+        },
+      },
     });
-
-   
-
-} catch (error) {
+  } catch (error) {
     next(error);
-
-
-    
-}
-
-}
+  }
+};
 
 export default newEntryController;
-
