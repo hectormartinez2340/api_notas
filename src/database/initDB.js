@@ -8,8 +8,6 @@ const initDB = async () => {
     await pool.query(`CREATE DATABASE IF NOT EXISTS notas`);
     await pool.query(`USE notas`);
 
-    console.log("Eliminando tablas");
-
     console.log("Creando tablas");
 
     await pool.query(`
@@ -38,7 +36,7 @@ const initDB = async () => {
         nombre VARCHAR(255) NOT NULL
       )
     `);
-
+    
     await pool.query(`
       CREATE TABLE IF NOT EXISTS notas (
         notas_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -50,7 +48,7 @@ const initDB = async () => {
         url VARCHAR(255)
       )
     `);
-
+ 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS imagenes (
         imagen_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -61,7 +59,7 @@ const initDB = async () => {
     `);
 
     console.log("¡Tablas creadas!");
-    process.exit(0);
+    process.exit(1);
   } catch (error) {
     console.error(error);
   }

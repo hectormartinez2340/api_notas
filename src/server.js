@@ -6,7 +6,7 @@ import express from "express";
 
 //importando archivos
 import routes from "./routes/index.js";
-import { notFoundController } from "./middlewares/index.js";
+import { errorController, notFoundController } from "./middlewares/index.js";
 
 //Comienzo a definir servidores
 const server = express();

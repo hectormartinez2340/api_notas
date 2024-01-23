@@ -1,21 +1,20 @@
 import getPool from "../../../database/getpool.js";
 
-conts insertEntryModel = async (title, place, description, userId) => {
-const pool = await getPool();
+const insertEntryModel = async (title, place, description, userId) => {
+  const pool = await getPool();
 
-const [result] = await pool.query(
-`
+  const [result] = await pool.query(
+    `
 INSERT INTO entries(title, place, description, userId)
 VALUES (?,?,?,?)`,
-[title, place, description, userId]
-);
+    [title, place, description, userId]
+  );
 
-console.log(result);
+  console.log(result);
 
-const {insertId} = result;
+  const { insertId } = result;
 
-return insertId;
-}
+  return insertId;
+};
 
 export default insertEntryModel;
-
